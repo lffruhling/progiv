@@ -7,17 +7,21 @@ var Cliente = mongoose.Schema({
 		type:String,
 		required:true
 	},
-	endereco:{
-		rua:String,
-		numero:Number,
-		cidade:String,
-		estado:String
-	},
+	email:String,
 	datanasc:{
 		type:Date,
 		required:true,
 		default:Date.now
+	},
+	endereco:{
+		estado:String,
+		cidade:String,
+		rua:String,
+		numero:Number,
+		bairro:String,
+		complemento: String
 	}
+	
 
 });
 

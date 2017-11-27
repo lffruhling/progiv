@@ -3,63 +3,84 @@ var router = express.Router();
 
 var Cliente = require("./../modulos/Cliente");
 
-router.get('/find', function(req, res){
+router.get('/', function(req, res){
 	/* Faz consulta igual a um select * from tabela*/
 	Cliente.find({}, function(err, clientes){
 		if(err){
 			return;
 		}
-		res.send(clientes);
-		
+		res.render('lista',{ title: 'Lista de Clientes', clientes: clientes });
 	});
+	
 });
 
-router.get('/find/nome/:nome',function(req,res){
-	/*Retorna apena um registro*/
-	Cliente.findOne({
-		nome: req.params.nome
-	}, function(err, cliente){
-		if(err){
+router.get('/create', function(req, res){
+	res.render('novo');
+	
+});
+
+router.post('/create', function(req,res){
+	Cliente.create({
+		nome: 				req.body.nome,
+		email: 				req.body.email,
+		datanasc: 			req.body.datanasc,
+		endereco:{
+			estado: 		req.body.estado,
+			cidade: 		req.body.cidade,
+			rua: 			req.body.rua,
+			numero: 		req.body.numero,
+			bairro: 		req.body.bairro,
+			complemento: 	req.body.complemento
+		}
+	},function(err, cliente){
+		if (err) {
 			return;
 		}
-		//res.send(cliente);
-		res.render('cliente', cliente);
+		res.redirect('/cliente/create');
 	});
 });
 
-router.get('/find/id/:id',function(req,res){
+router.get('/edit/:id',function(req,res){
 	/*pesquisa pelo id*/
 	Cliente.findById(req.params.id, function(err, cliente){
 		if(err){
 			return;
 		}
-		// res.send(cliente);
-		res.render('cliente', cliente);
+		res.render('edit', cliente);
 
 	});
 });
 
-/*posso usar post, put tmb*/
-router.get('/save/:nome',function(req,res){
-	var cliente = new Cliente({
-		nome: req.params.nome
+router.post('/edit/:id', function(req,res){
+	Cliente.findByIdAndUpdate(req.params.id, { 
+		$set: { 
+				nome: 				req.body.nome,
+				email: 				req.body.email,
+				datanasc: 			req.body.datanasc,
+				endereco:{
+					estado: 		req.body.estado,
+					cidade: 		req.body.cidade,
+					rua: 			req.body.rua,
+					numero: 		req.body.numero,
+					bairro: 		req.body.bairro,
+					complemento: 	req.body.complemento
+				}
+			}
+		}, 
+		{ new: true }, function (err, cliente) {
+		  if (err) return handleError(err);
+		 res.redirect('/cliente');
 	});
+});
 
-	Cliente.save(cliente, function(err, cliente){
+router.get('/delete/:id',function(req,res){
+	/*deleta pelo id*/
+	Cliente.deleteOne(req.params.id, function(err, cliente){
 		if(err){
 			return;
 		}
-		res.send(cliente);
-	})
-});
+		res.redirect('/cliente');
 
-router.get('/create/:nome', function(req,res){
-	Cliente.create({
-		nome:req.params.nome
-	},function(err, cliente){
-		if (err) {
-			return;
-		}res.send(cliente);
 	});
 });
 

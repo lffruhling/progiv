@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 Editar Cliente
+
+        // register form
+        form(method='post' action='/cliente/edit/'+_id)
+          div.form-group
+            label(for='nome') Nome:
+            input#nome.form-control(type="text" value=nome name="nome")
+          
+          div.form-group
+            label(for='email') E-mail:
+            input#email.form-control(type='email' value=email name='email')
+          
+          div.form-group
+            label(for='datanasc') Data de Nascimento:
+            input#datanasc.form-control(type='text' value=datanasc name='datanasc')
+          
+          div.form-group
+            label(for='estado') Estado:
+            input#estado.form-control(type='text' value=endereco.estado name='estado')
+          
+          div.form-group
+            label(for='cidade') Cidade:
+            input#cidade.form-control(type='text' value=endereco.cidade name='cidade')
+          
+          div.form-group
+            label(for='rua') Rua:
+            input#rua.form-control(type='text' value=endereco.rua name='rua')
+          
+          div.form-group
+            label(for='numero') Número:
+            input#numero.form-control(type='number' value=endereco.numero name='numero')
+          
+          div.form-group
+            label(for='bairro') Bairro:
+            input#bairro.form-control(type='text' value=endereco.bairro name='bairro')
+
+          div.form-group
+            label(for='complemento') Complemento:
+            input#complemento.form-control(type='text' value=endereco.complemento name='complemento')
+        
+          a.btn.btn-default(href="/cliente") Voltar
+          
+          button.btn.btn-success(type='submit') Salvar

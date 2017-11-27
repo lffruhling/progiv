@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 #{title}
+
+        a.btn.btn-primary.pull-right(href="/cliente/create") Novo Cliente
+
+    .row
+      .col-md-9
+        table.table.table-striped.table-hover
+          thead
+            th Nome
+            th E-mail
+            th Ação
+
+          tbody
+            each cliente in clientes
+              tr
+                td= cliente.nome
+                td= cliente.email
+                td 
+                  a.btn.btn-danger.pull-right(href="/cliente/delete/"+cliente.id) 
+                    i.glyphicon.glyphicon-trash
+                  |
+                  a.btn.btn-warning.pull-right(href="/cliente/edit/"+cliente.id)
+                    i.glyphicon.glyphicon-pencil

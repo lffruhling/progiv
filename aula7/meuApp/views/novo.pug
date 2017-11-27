@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 Novo Cliente
+
+        // register form
+        form(method='POST' action='/cliente/create')
+          div.form-group
+            label(for='nome') Nome:
+            input#nome.form-control(type='text', placeholder='Nome Completo' name='nome')
+          
+          div.form-group
+            label(for='email') E-mail:
+            input#email.form-control(type='email', placeholder='nome@email.com' name='email')
+          
+          div.form-group
+            label(for='datanasc') Data de Nascimento:
+            input#datanasc.form-control(type='text', placeholder='21/11/2017' name='datanasc')
+          
+          div.form-group
+            label(for='estado') Estado:
+            input#estado.form-control(type='text', placeholder='Rio Grande do Sul' name='estado')
+          
+          div.form-group
+            label(for='cidade') Cidade:
+            input#cidade.form-control(type='text', placeholder='Cidade' name='cidade')
+          
+          div.form-group
+            label(for='rua') Rua:
+            input#rua.form-control(type='text', placeholder='Rua' name='rua')
+          
+          div.form-group
+            label(for='numero') Número:
+            input#numero.form-control(type='number', placeholder='123' name='numero')
+          
+          div.form-group
+            label(for='bairro') Bairro:
+            input#bairro.form-control(type='text', placeholder='Bairro' name='bairro')
+
+          div.form-group
+            label(for='complemento') Complemento:
+            input#complemento.form-control(type='text', placeholder='Complemento' name='complemento')
+        
+          a.btn.btn-default(href="/cliente") Voltar
+          
+          button.btn.btn-success(type='submit') Salvar
+
+
+
+  
